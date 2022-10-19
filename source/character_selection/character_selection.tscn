@@ -1,0 +1,181 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://fonts/Bohemian Typewriter.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://character_selection/character_selection.gd" type="Script" id=2]
+[ext_resource path="res://transition/transition.tscn" type="PackedScene" id=3]
+[ext_resource path="res://button_theme.tres" type="Theme" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 36
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 42
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0, 0, 0, 0.588235 )
+border_color = Color( 0, 1, 0, 1 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 20
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 1 )
+
+[node name="character_selection" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="parent_container" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 50.0
+margin_top = 20.0
+margin_right = -48.4927
+margin_bottom = -50.0
+custom_constants/separation = 15
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="title" type="Label" parent="parent_container"]
+margin_left = 296.0
+margin_right = 628.0
+margin_bottom = 42.0
+size_flags_horizontal = 4
+theme = ExtResource( 4 )
+custom_fonts/font = SubResource( 1 )
+text = "Pick a character"
+
+[node name="button_container" type="HBoxContainer" parent="parent_container"]
+margin_top = 57.0
+margin_right = 925.0
+margin_bottom = 530.0
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="poleric_button" type="Button" parent="parent_container/button_container"]
+modulate = Color( 0, 0, 0.588235, 1 )
+margin_right = 460.0
+margin_bottom = 473.0
+focus_mode = 0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_disabled = Color( 0.196078, 0.196078, 0.196078, 1 )
+custom_colors/font_color = Color( 0.784314, 0.784314, 0.784314, 1 )
+custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
+custom_colors/font_color_pressed = Color( 0.588235, 0.588235, 0.588235, 1 )
+enabled_focus_mode = 0
+text = "Poleric"
+
+[node name="repenter_button" type="Button" parent="parent_container/button_container"]
+modulate = Color( 0.588235, 0, 0, 1 )
+margin_left = 464.0
+margin_right = 925.0
+margin_bottom = 473.0
+focus_mode = 0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_disabled = Color( 0.196078, 0.196078, 0.196078, 1 )
+custom_colors/font_color = Color( 0.784314, 0.784314, 0.784314, 1 )
+custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
+custom_colors/font_color_pressed = Color( 0.588235, 0.588235, 0.588235, 1 )
+enabled_focus_mode = 0
+text = "Repenter"
+
+[node name="prompt_bkg" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.588235 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="tutorial_prompt" type="Panel" parent="prompt_bkg"]
+margin_left = 212.0
+margin_top = 200.0
+margin_right = 812.0
+margin_bottom = 350.0
+custom_styles/panel = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="prompt_bkg/tutorial_prompt"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="prompt_bkg/tutorial_prompt/VBoxContainer"]
+margin_right = 580.0
+margin_bottom = 62.0
+size_flags_vertical = 3
+theme = ExtResource( 4 )
+custom_fonts/font = SubResource( 4 )
+text = "Do you want to a tutorial, or would you like to learn on the go?"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="prompt_bkg/tutorial_prompt/VBoxContainer"]
+margin_left = 114.0
+margin_top = 66.0
+margin_right = 466.0
+margin_bottom = 129.0
+size_flags_horizontal = 4
+size_flags_vertical = 3
+custom_constants/separation = 100
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="tutorial" type="Button" parent="prompt_bkg/tutorial_prompt/VBoxContainer/HBoxContainer"]
+margin_top = 21.0
+margin_right = 173.0
+margin_bottom = 42.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme = ExtResource( 4 )
+custom_fonts/font = SubResource( 5 )
+text = " Take the tutorial "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="no_tutorial" type="Button" parent="prompt_bkg/tutorial_prompt/VBoxContainer/HBoxContainer"]
+margin_left = 273.0
+margin_top = 21.0
+margin_right = 352.0
+margin_bottom = 42.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme = ExtResource( 4 )
+custom_fonts/font = SubResource( 5 )
+text = " Skip it "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="transition" parent="." instance=ExtResource( 3 )]
+[connection signal="pressed" from="parent_container/button_container/poleric_button" to="." method="_on_poleric_button_pressed"]
+[connection signal="pressed" from="parent_container/button_container/repenter_button" to="." method="_on_repenter_button_pressed"]
+[connection signal="pressed" from="prompt_bkg/tutorial_prompt/VBoxContainer/HBoxContainer/tutorial" to="." method="_on_tutorial_pressed"]
+[connection signal="pressed" from="prompt_bkg/tutorial_prompt/VBoxContainer/HBoxContainer/no_tutorial" to="." method="_on_no_tutorial_pressed"]

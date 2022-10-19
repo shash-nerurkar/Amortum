@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 0, 1, 0, 1, 1, 1, 1, 1 )
+
+[node name="laser_ray" type="RayCast2D"]
+enabled = true
+collision_mask = 17
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PoolVector2Array( 0, 0, 0, 0 )
+width = 0.0
+gradient = SubResource( 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = true
+
+[node name="laser" type="Tween" parent="."]

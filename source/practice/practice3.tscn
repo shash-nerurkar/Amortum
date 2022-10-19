@@ -1,0 +1,61 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://practice/practice3.gd" type="Script" id=1]
+[ext_resource path="res://player/dice.tscn" type="PackedScene" id=2]
+
+[node name="practice3" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="grid_num" type="LineEdit" parent="."]
+margin_left = 60.2768
+margin_top = 64.2659
+margin_right = 118.277
+margin_bottom = 88.2659
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="grid_num"]
+margin_top = 30.0
+margin_right = 134.0
+margin_bottom = 44.0
+text = "Row/Column number"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="dir" type="LineEdit" parent="."]
+margin_left = 246.583
+margin_top = 64.135
+margin_right = 304.583
+margin_bottom = 88.135
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="dir"]
+margin_top = 30.0
+margin_right = 134.0
+margin_bottom = 44.0
+text = "Direction"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="."]
+margin_left = 157.44
+margin_top = 127.017
+margin_right = 218.44
+margin_bottom = 147.017
+text = "ROTATE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="dice" parent="." instance=ExtResource( 2 )]
+position = Vector2( 348.046, 223.518 )
+scale = Vector2( 3, 3 )
+[connection signal="rotate_dice" from="." to="dice" method="_on_practice3_rotate_dice"]
+[connection signal="text_entered" from="grid_num" to="." method="_on_grid_num_text_entered"]
+[connection signal="text_entered" from="dir" to="." method="_on_dir_text_entered"]
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

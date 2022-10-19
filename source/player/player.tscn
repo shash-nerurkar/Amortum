@@ -1,0 +1,82 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://player/flying.gd" type="Script" id=1]
+[ext_resource path="res://weapon/weapon.tscn" type="PackedScene" id=29]
+
+[sub_resource type="SpriteFrames" id=1]
+resource_local_to_scene = true
+animations = [ {
+"frames": [  ],
+"loop": true,
+"name": "idle",
+"speed": 10.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "run",
+"speed": 18.0
+}, {
+"frames": [  ],
+"loop": false,
+"name": "death",
+"speed": 15.0
+}, {
+"frames": [  ],
+"loop": false,
+"name": "jump",
+"speed": 20.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 7.90028, 29.4709 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 9.05566, 32.2593 )
+
+[node name="player" type="KinematicBody2D" groups=[
+"player",
+]]
+collision_mask = 56
+script = ExtResource( 1 )
+
+[node name="sprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "idle"
+
+[node name="collision" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( -2.84079, 2.57025 )
+shape = SubResource( 2 )
+disabled = true
+
+[node name="detector" type="Area2D" parent="."]
+visible = false
+position = Vector2( -2.54814, 2.54814 )
+monitoring = false
+
+[node name="collision" type="CollisionShape2D" parent="detector"]
+shape = SubResource( 3 )
+
+[node name="weapon" parent="." instance=ExtResource( 29 )]
+position = Vector2( 1.22087, 11.5982 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = -20.7605
+margin_top = -41.1888
+margin_right = 19.2395
+margin_bottom = -27.1888
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="spawning" type="Tween" parent="."]
+
+[node name="dash" type="Timer" parent="."]
+one_shot = true
+[connection signal="animation_finished" from="sprite" to="." method="_on_sprite_animation_finished"]
+[connection signal="area_entered" from="detector" to="." method="_on_detector_area_entered"]
+[connection signal="area_exited" from="detector" to="." method="_on_detector_area_exited"]
+[connection signal="body_entered" from="detector" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="detector" to="." method="_on_Area2D_body_exited"]
+[connection signal="tween_all_completed" from="spawning" to="." method="_on_spawning_tween_all_completed"]
+[connection signal="timeout" from="dash" to="." method="_on_dash_timeout"]

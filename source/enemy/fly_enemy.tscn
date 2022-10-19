@@ -1,0 +1,143 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://button_theme.tres" type="Theme" id=1]
+[ext_resource path="res://enemy/fly_enemy.gd" type="Script" id=2]
+[ext_resource path="res://enemy/art/bar_under.png" type="Texture" id=3]
+[ext_resource path="res://enemy/art/bar.png" type="Texture" id=4]
+[ext_resource path="res://enemy/art/bar_over.png" type="Texture" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 9.40788, 8.18368 )
+
+[node name="enemy" type="KinematicBody2D" groups=[
+"enemy",
+]]
+collision_layer = 2
+collision_mask = 20
+script = ExtResource( 2 )
+
+[node name="Head" type="Label" parent="." groups=[
+"body_label",
+]]
+margin_left = 8.0
+margin_top = -12.5
+margin_right = 21.0
+margin_bottom = 12.5
+rect_rotation = 90.0
+rect_pivot_offset = Vector2( 6.5, 12.5 )
+theme = ExtResource( 1 )
+text = "A"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RightArm" type="Label" parent="." groups=[
+"body_label",
+]]
+margin_left = -2.0
+margin_top = -15.0
+margin_right = 10.0003
+margin_bottom = 10.0
+rect_rotation = 100.0
+rect_pivot_offset = Vector2( 6.5, 12.5 )
+theme = ExtResource( 1 )
+text = "C"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Torso" type="Label" parent="." groups=[
+"body_label",
+]]
+margin_left = -13.0
+margin_top = -19.0
+margin_right = -9.53674e-07
+margin_bottom = 6.0
+rect_rotation = 100.0
+rect_pivot_offset = Vector2( 6.5, 12.5 )
+theme = ExtResource( 1 )
+text = "D"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LeftArm" type="Label" parent="." groups=[
+"body_label",
+]]
+margin_left = -2.0
+margin_top = -7.0
+margin_right = 12.0
+margin_bottom = 18.0
+rect_rotation = 80.0
+rect_pivot_offset = Vector2( 7, 12.5 )
+theme = ExtResource( 1 )
+text = "B"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tail" type="Label" parent="." groups=[
+"body_label",
+]]
+margin_left = -14.0
+margin_top = -4.0
+margin_right = -1.0
+margin_bottom = 21.0
+rect_rotation = 80.0
+rect_pivot_offset = Vector2( 6.5, 12.5 )
+theme = ExtResource( 1 )
+text = "F"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="collision" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 5.98834, 3.94949 )
+shape = SubResource( 1 )
+
+[node name="face" type="RayCast2D" parent="."]
+visible = false
+enabled = true
+cast_to = Vector2( -44, 0 )
+collision_mask = 17
+
+[node name="state" type="Label" parent="."]
+margin_left = -0.648865
+margin_top = -48.577
+margin_right = -0.648865
+margin_bottom = -34.577
+grow_horizontal = 2
+grow_vertical = 2
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureProgress" type="TextureProgress" parent="."]
+margin_left = -15.0
+margin_top = -30.0
+margin_right = 25.0
+margin_bottom = 10.0
+rect_scale = Vector2( 2, 1 )
+max_value = 1.0
+step = 0.01
+texture_under = ExtResource( 3 )
+texture_over = ExtResource( 5 )
+texture_progress = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="movement" type="Tween" parent="."]
+
+[node name="attack" type="Tween" parent="."]
+
+[node name="death" type="Tween" parent="."]
+
+[node name="attack_timer" type="Timer" parent="."]
+one_shot = true
+[connection signal="tween_all_completed" from="movement" to="." method="_on_movement_tween_all_completed"]
+[connection signal="tween_all_completed" from="attack" to="." method="_on_attack_tween_all_completed"]
+[connection signal="tween_all_completed" from="death" to="." method="_on_death_tween_all_completed"]

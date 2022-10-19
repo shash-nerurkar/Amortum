@@ -1,0 +1,173 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://button_theme.tres" type="Theme" id=1]
+[ext_resource path="res://enemy/ground_enemy.gd" type="Script" id=2]
+[ext_resource path="res://enemy/art/bar.png" type="Texture" id=3]
+[ext_resource path="res://enemy/art/bar_under.png" type="Texture" id=4]
+[ext_resource path="res://enemy/art/bar_over.png" type="Texture" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8.9137, 24.2454 )
+
+[node name="enemy" type="KinematicBody2D" groups=[
+"enemy",
+]]
+position = Vector2( 499.885, 313.785 )
+collision_layer = 2
+collision_mask = 20
+script = ExtResource( 2 )
+
+[node name="Head" type="Label" parent="." groups=[
+"body_label",
+]]
+margin_left = -6.283
+margin_top = -30.0
+margin_right = 6.717
+margin_bottom = -5.0
+rect_pivot_offset = Vector2( 6.5, 12.5 )
+theme = ExtResource( 1 )
+text = "A"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RightArm" type="Label" parent="." groups=[
+"body_label",
+]]
+margin_left = -11.0
+margin_top = -12.0
+margin_right = 1.0
+margin_bottom = 13.0
+rect_pivot_offset = Vector2( 6.5, 12.5 )
+theme = ExtResource( 1 )
+text = "C"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Torso" type="Label" parent="." groups=[
+"body_label",
+]]
+margin_left = -5.0
+margin_top = -13.0
+margin_right = 8.0
+margin_bottom = 12.0
+rect_pivot_offset = Vector2( 6.5, 12.5 )
+theme = ExtResource( 1 )
+text = "D"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LeftArm" type="Label" parent="." groups=[
+"body_label",
+]]
+margin_left = 2.0
+margin_top = -13.0
+margin_right = 16.0
+margin_bottom = 12.0
+rect_pivot_offset = Vector2( 6.5, 12.5 )
+theme = ExtResource( 1 )
+text = "B"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RightLeg" type="Label" parent="." groups=[
+"body_label",
+]]
+margin_left = -9.0
+margin_top = 5.0
+margin_right = 4.00002
+margin_bottom = 30.0
+rect_pivot_offset = Vector2( 6.5, 12.5 )
+theme = ExtResource( 1 )
+text = "F"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LeftLeg" type="Label" parent="." groups=[
+"body_label",
+]]
+margin_left = -3.0
+margin_top = 5.0
+margin_right = 10.0
+margin_bottom = 30.0
+rect_pivot_offset = Vector2( 6.5, 12.5 )
+theme = ExtResource( 1 )
+text = "E"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="collision" type="CollisionShape2D" parent="."]
+position = Vector2( -0.318737, 0.232826 )
+shape = SubResource( 1 )
+
+[node name="sight" type="RayCast2D" parent="."]
+visible = false
+position = Vector2( -1.66431, 23.0234 )
+enabled = true
+cast_to = Vector2( -22, 0 )
+collision_mask = 17
+
+[node name="floor" type="RayCast2D" parent="sight"]
+position = Vector2( -22, 0 )
+enabled = true
+cast_to = Vector2( 0, 600 )
+collision_mask = 17
+
+[node name="torso" type="RayCast2D" parent="sight"]
+position = Vector2( -22, 0 )
+enabled = true
+cast_to = Vector2( 0, -22 )
+collision_mask = 17
+
+[node name="face" type="RayCast2D" parent="sight"]
+position = Vector2( -22, -22 )
+enabled = true
+cast_to = Vector2( 0, -22 )
+collision_mask = 17
+
+[node name="state" type="Label" parent="."]
+margin_left = -0.648865
+margin_top = -48.577
+margin_right = -0.648865
+margin_bottom = -34.577
+grow_horizontal = 2
+grow_vertical = 2
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureProgress" type="TextureProgress" parent="."]
+margin_left = -25.0
+margin_top = -30.0
+margin_right = 15.0
+margin_bottom = 10.0
+rect_scale = Vector2( 3, 1 )
+max_value = 1.0
+step = 0.01
+texture_under = ExtResource( 4 )
+texture_over = ExtResource( 5 )
+texture_progress = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="movement" type="Tween" parent="."]
+
+[node name="attack" type="Tween" parent="."]
+
+[node name="death" type="Tween" parent="."]
+
+[node name="attack_timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Particles2D" type="Particles2D" parent="."]
+[connection signal="tween_all_completed" from="movement" to="." method="_on_movement_tween_all_completed"]
+[connection signal="tween_all_completed" from="attack" to="." method="_on_attack_tween_all_completed"]
+[connection signal="tween_all_completed" from="death" to="." method="_on_death_tween_all_completed"]

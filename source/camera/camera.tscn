@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://camera/camera.gd" type="Script" id=1]
+
+[node name="camera" type="Camera2D"]
+position = Vector2( 512, 300 )
+rotating = true
+current = true
+script = ExtResource( 1 )
+
+[node name="offset_tween" type="Tween" parent="."]
+
+[node name="zoom_tween" type="Tween" parent="."]
+
+[node name="frequency" type="Timer" parent="."]
+
+[node name="duration" type="Timer" parent="."]
+one_shot = true
+[connection signal="timeout" from="frequency" to="." method="_on_frequency_timeout"]
+[connection signal="timeout" from="duration" to="." method="_on_duration_timeout"]

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 6, 12.5 )
+
+[node name="melee_coll" type="Area2D"]
+monitoring = false
+collision_layer = 8
+
+[node name="collision" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )

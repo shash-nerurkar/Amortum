@@ -1,0 +1,66 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://portal/portal.gd" type="Script" id=1]
+[ext_resource path="res://portal/portal/despawn_3.png" type="Texture" id=2]
+[ext_resource path="res://portal/portal/despawn_8.png" type="Texture" id=3]
+[ext_resource path="res://portal/portal/despawn_7.png" type="Texture" id=4]
+[ext_resource path="res://portal/portal/idle_2.png" type="Texture" id=5]
+[ext_resource path="res://portal/portal/despawn_5.png" type="Texture" id=6]
+[ext_resource path="res://portal/portal/despawn_4.png" type="Texture" id=7]
+[ext_resource path="res://portal/portal/idle_1.png" type="Texture" id=8]
+[ext_resource path="res://portal/portal/despawn_1.png" type="Texture" id=9]
+[ext_resource path="res://portal/portal/despawn_2.png" type="Texture" id=10]
+[ext_resource path="res://portal/portal/despawn_6.png" type="Texture" id=11]
+[ext_resource path="res://portal/portal/spawn_8.png" type="Texture" id=12]
+[ext_resource path="res://portal/portal/spawn_6.png" type="Texture" id=13]
+[ext_resource path="res://portal/portal/idle_8.png" type="Texture" id=14]
+[ext_resource path="res://portal/portal/idle_6.png" type="Texture" id=15]
+[ext_resource path="res://portal/portal/spawn_1.png" type="Texture" id=16]
+[ext_resource path="res://portal/portal/idle_3.png" type="Texture" id=17]
+[ext_resource path="res://portal/portal/spawn_7.png" type="Texture" id=18]
+[ext_resource path="res://portal/portal/idle_4.png" type="Texture" id=19]
+[ext_resource path="res://portal/portal/idle_5.png" type="Texture" id=20]
+[ext_resource path="res://portal/portal/spawn_2.png" type="Texture" id=21]
+[ext_resource path="res://portal/portal/spawn_3.png" type="Texture" id=22]
+[ext_resource path="res://portal/portal/spawn_4.png" type="Texture" id=23]
+[ext_resource path="res://portal/portal/spawn_5.png" type="Texture" id=24]
+[ext_resource path="res://portal/portal/idle_7.png" type="Texture" id=25]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 8 ), ExtResource( 5 ), ExtResource( 17 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 15 ), ExtResource( 25 ), ExtResource( 14 ) ],
+"loop": true,
+"name": "idle",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 16 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 13 ), ExtResource( 18 ), ExtResource( 12 ) ],
+"loop": false,
+"name": "spawn",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 10 ), ExtResource( 2 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 11 ), ExtResource( 4 ), ExtResource( 3 ) ],
+"loop": false,
+"name": "despawn",
+"speed": 10.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 6.17535
+height = 29.5711
+
+[node name="portal" type="Area2D"]
+visible = false
+collision_layer = 32
+script = ExtResource( 1 )
+
+[node name="sprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "spawn"
+
+[node name="collision" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( -0.170509, 4.00707 )
+shape = SubResource( 2 )
+disabled = true
+[connection signal="body_entered" from="." to="." method="_on_portal_body_entered"]
+[connection signal="animation_finished" from="sprite" to="." method="_on_sprite_animation_finished"]

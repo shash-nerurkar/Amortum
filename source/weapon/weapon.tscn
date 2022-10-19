@@ -1,0 +1,80 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://weapon/weapon.gd" type="Script" id=1]
+
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 0.4375, 0.4375, 0.4375, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 2
+emission_box_extents = Vector3( 1, 10, 0 )
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color_ramp = SubResource( 2 )
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 39.1283
+
+[sub_resource type="Animation" id=5]
+resource_name = "attack"
+length = 0.35
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("melee_weapon/sprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.35 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 30.0, 130.0, 30.0 ]
+}
+
+[node name="weapon" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="sprite" type="Sprite" parent="."]
+
+[node name="muzzle" type="Position2D" parent="sprite"]
+rotation = 0.523599
+
+[node name="bullet_container" type="Node" parent="."]
+
+[node name="melee_weapon" type="Area2D" parent="."]
+monitoring = false
+collision_layer = 4
+collision_mask = 2
+
+[node name="sprite" type="Sprite" parent="melee_weapon"]
+rotation = 0.523599
+offset = Vector2( 0, -23 )
+
+[node name="particles" type="Particles2D" parent="melee_weapon/sprite"]
+show_behind_parent = true
+position = Vector2( 0, -23 )
+emitting = false
+amount = 100
+lifetime = 0.3
+preprocess = 7.0
+local_coords = false
+process_material = SubResource( 3 )
+
+[node name="collision" type="CollisionShape2D" parent="melee_weapon"]
+visible = false
+position = Vector2( 18.497, -3.49498 )
+rotation = 0.482466
+shape = SubResource( 4 )
+
+[node name="tween" type="Tween" parent="."]
+
+[node name="anim_player" type="AnimationPlayer" parent="."]
+anims/attack = SubResource( 5 )
+[connection signal="body_entered" from="melee_weapon" to="." method="_on_melee_weapon_body_entered"]
+[connection signal="animation_finished" from="anim_player" to="." method="_on_anim_player_animation_finished"]

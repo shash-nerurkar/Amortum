@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://button_theme.tres" type="Theme" id=1]
+
+[node name="Bone" type="Label" groups=[
+"body_label",
+]]
+margin_right = 13.0
+margin_bottom = 25.0
+rect_pivot_offset = Vector2( 6.5, 12.5 )
+theme = ExtResource( 1 )
+text = "A"
+__meta__ = {
+"_edit_use_anchors_": false
+}

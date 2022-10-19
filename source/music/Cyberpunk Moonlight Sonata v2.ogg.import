@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Cyberpunk Moonlight Sonata v2.ogg-0ad4e2d6174a55ebf2c51141776416a6.oggstr"
+
+[deps]
+
+source_file="res://music/Cyberpunk Moonlight Sonata v2.ogg"
+dest_files=[ "res://.import/Cyberpunk Moonlight Sonata v2.ogg-0ad4e2d6174a55ebf2c51141776416a6.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
